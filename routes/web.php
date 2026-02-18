@@ -58,3 +58,4 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::put('/users/update/{id}', [ContentController::class, 'userUpdate'])->name('admin.users.update');
     Route::delete('/users/{id}', [ContentController::class, 'userDelete'])->name('admin.users.delete');
 });
+Route::post('/send-investment-contact', [App\Http\Controllers\ContactController::class, 'sendInvestment'])->name('send.investment.contact');

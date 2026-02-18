@@ -65,22 +65,32 @@
         <div class="max-w-full mx-auto px-6 md:px-10 py-5 flex justify-between items-center">
             
             {{-- Adaptive Logo --}}
-            <a href="#home" class="text-xl font-bold tracking-[0.3em] text-black dark:text-white italic uppercase">
-                <span class="hidden md:inline">{{ $contents['site_name'] ?? 'BAPS hindu mandir' }}</span>
-                <span class="md:hidden">BAPS</span>
-            </a>
+            <a href="#home" class="flex items-center gap-3 text-xl font-bold tracking-[0.3em] text-black dark:text-white italic uppercase group">
+            {{-- Logo di Kiri Teks --}}
+            <img src="{{ asset('uploads/content/subfossil.png') }}" 
+                 alt="Logo" 
+                 class="h-10 w-auto object-contain brightness-0 dark:invert opacity-80 group-hover:opacity-100 transition-opacity">
+            
+            <span class="hidden md:inline capitalize">{{ $contents['site_name'] ?? 'baps hindu mandir' }}</span>
+            <span class="md:hidden">BAPS</span>
+        </a>
             
             {{-- Navigation Desktop (Visible only on Desktop) --}}
             <div class="hidden md:flex gap-12 text-sm font-bold text-zinc-400 tracking-[0.2em] uppercase">
                 <a href="#home" :class="activeSection === 'home' ? 'text-black dark:text-white border-b border-black dark:border-white' : 'hover:text-black dark:hover:text-white'">Home</a>
                 <a href="#collections" :class="activeSection === 'collections' ? 'text-black dark:text-white border-b border-black dark:border-white' : 'hover:text-black dark:hover:text-white'">Collections</a>
-                <a href="#events" :class="activeSection === 'events' ? 'text-black dark:text-white border-b border-black dark:border-white' : 'hover:text-black dark:hover:text-white'">Events</a>
-                <a href="#about" :class="activeSection === 'about' ? 'text-black dark:text-white border-b border-black dark:border-white' : 'hover:text-black dark:hover:text-white'">About</a>
+                <a href="#events" :class="activeSection === 'events' ? 'text-black dark:text-white border-b border-black dark:border-white' : 'hover:text-black dark:hover:text-white'">Pillars</a>
+                <a href="#about" :class="activeSection === 'about' ? 'text-black dark:text-white border-b border-black dark:border-white' : 'hover:text-black dark:hover:text-white'">Inquiry</a>
             </div>
 
             {{-- Auth Section --}}
             <div class="flex items-center gap-4 md:gap-8">
                 @auth
+                <a href="https://radkasyrova.com" target="_blank" class="hidden md:block hover:scale-105 transition-transform">
+            <img src="{{ asset('uploads/content/radkasyrova.png') }}" 
+                 alt="Radka Syrova" 
+                 class="h-12 w-auto object-contain brightness-0 dark:invert opacity-80 hover:opacity-100">
+        </a>
                     {{-- User Info (Desktop only) --}}
                     <div class="hidden md:block text-right border-r border-zinc-200 dark:border-zinc-800 pr-6">
                         <p class="text-[8px] text-zinc-400 uppercase tracking-[0.5em] leading-none mb-1 italic font-bold">Authorized</p>

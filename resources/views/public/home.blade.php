@@ -73,9 +73,21 @@
         <div x-data="{ open: false }" class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 mt-16">
     
     {{-- Button Inquire --}}
-    <button @click="open = true" class="w-full sm:w-auto bg-[#d4af37] text-black px-12 py-4 text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-white transition-all duration-500 shadow-xl focus:outline-none">
+    <div class="flex flex-col items-center gap-4 w-full sm:w-auto"> {{-- Wrapper agar lebarnya konsisten --}}
+    
+    {{-- Button Inquiry --}}
+    <button @click="open = true" class="w-full bg-[#d4af37] text-black px-12 py-4 text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-white transition-all duration-500 shadow-xl focus:outline-none">
         Inquire Now
     </button>
+
+    {{-- Logo Radka Syrova --}}
+    <a href="https://radkasyrova.com" target="_blank" class="w-full hover:scale-105 transition-transform flex justify-center">
+        <img src="{{ asset('uploads/content/radkasyrovaw.png') }}" 
+             alt="Radka Syrova" 
+             class="w-full h-24 object-contain brightness-100 dark:invert opacity-80 hover:opacity-100">
+    </a>
+
+</div>
 
     {{-- Popup Modal (Contact Card) --}}
     <template x-teleport="body">
@@ -128,6 +140,12 @@
                             <p class="text-base italic font-serif text-black dark:text-white">goura123wayan.com</p>
                         </div>
                     </a>
+                    <div class="pt-4 flex flex-col items-center border-t border-zinc-100 dark:border-zinc-800/50">
+        <img src="{{ asset('uploads/content/radkasyrova.png') }}" 
+             alt="Radka Syrova Curator" 
+             class="h-10 w-auto object-contain brightness-0 dark:invert opacity-60 hover:opacity-100 transition-opacity duration-500">
+        <p class="text-[8px] tracking-[0.5em] text-zinc-400 uppercase mt-3 italic font-bold">Lead Curator</p>
+    </div>
                 </div>
                 <div class="bg-zinc-50 dark:bg-zinc-900/50 p-6 text-center">
                     <p class="text-[9px] text-zinc-400 uppercase tracking-[0.3em]">Confidentiality Guaranteed — Est. 6500 Years Ago</p>
@@ -140,7 +158,7 @@
 </section>
 
 {{-- 01. THE ORIGIN SECTION --}}
-<section id="about" class="py-24 md:py-20 bg-white dark:bg-darkBg text-black dark:text-white px-6 overflow-hidden transition-colors duration-500">
+<section class="py-24 md:py-20 bg-white dark:bg-darkBg text-black dark:text-white px-6 overflow-hidden transition-colors duration-500">
     <div class="max-w-[1400px] mx-auto grid lg:grid-cols-12 gap-16 items-center">
         
         {{-- SISI KIRI: MEDIA (FOTO) --}}
@@ -445,17 +463,25 @@
             </h2>
 
             {{-- Deskripsi: Normal Font Style & Lebih Kecil --}}
-            <div class="text-lg lg:text-1xl text-base text-zinc-500 @auth cursor-edit @endauth" 
-     @auth @click.stop="$dispatch('open-editor', { label: 'Grid Desc 2', type: 'textarea', key: 'grid_desc_2', value: `{{ $contents['grid_desc_2'] ?? '' }}` })" @endauth>
-    <p style="font-family: ui-sans-serif, system-ui, -apple-system, Arial, sans-serif !important; 
-              font-style: normal !important; 
-              font-weight: 400 !important; 
-              line-height: 1.625 !important; 
-              letter-spacing: normal !important; 
-              text-transform: none !important;">
-        {{ $contents['grid_desc_2'] ?? 'Our artisans respect the wood’s ancient journey, using traditional techniques to reveal its deep, obsidian soul.' }}
-    </p>
-</div>
+            <div class="max-w-1xl mx-auto mb-4 relative z-[99]">
+            <div class="text-lgtext-zinc-600 dark:text-zinc-400 font-normal leading-relaxed @auth cursor-edit @endauth"
+                 @auth 
+                    @click.stop="$dispatch('open-editor', { 
+                        label: 'Blog Description', 
+                        type: 'textarea', 
+                        key: 'blog_description', 
+                        value: `{{ $contents['blog_description'] ?? 'Explore our insights into the preservation process...' }}` 
+                    })" 
+                 @endauth>
+                
+                <p class="antialiased tracking-normal whitespace-pre-line" 
+                   style="font-family: ui-sans-serif, system-ui, -apple-system, Arial, sans-serif !important; 
+                          font-style: normal !important; 
+                          font-weight: 400 !important;">
+                    {{ $contents['blog_description'] ?? 'Explore our insights into the preservation process, the geological history of subfossil timber, and the artistic journey of bringing 6,500-year-old wood back to life.' }}
+                </p>
+            </div>
+        </div>
         </div>
 
         {{-- Media: Video (Col 7) dengan Efek Mengambang --}}
@@ -668,7 +694,7 @@
         <div class="w-24 h-[1px] bg-[#d4af37] mx-auto mt-2"></div> {{-- mt-18 dikurangi menjadi mt-6 --}}
     </div>
 </section>
-<section id="events" class="py-8 md:py-12 bg-white dark:bg-darkBg overflow-hidden">
+<section class="py-8 md:py-12 bg-white dark:bg-darkBg overflow-hidden">
     <div class="max-w-[1400px] mx-auto px-6">
         <div class="space-y-8 md:space-y-12 pt-4 relative">
             
@@ -730,7 +756,7 @@
 </section>
 
 {{-- 2. PHASE LIST SECTION --}}
-<section class="py-12 md:py-16 bg-white dark:bg-darkBg overflow-hidden">
+<section id="events" class="py-12 md:py-16 bg-white dark:bg-darkBg overflow-hidden">
     <div class="max-w-[1200px] mx-auto px-8 lg:px-20">
         <h2 class="text-5xl italic text-black dark:text-white tracking-tighter mb-10 @auth cursor-edit @endauth"
             @auth @click="$dispatch('open-editor', { label: 'Acquisition Title', type: 'textarea', key: 'ev_hero_title', value: `{{ $contents['ev_hero_title'] ?? "Confidential \n Acquisition." }}` })" @endauth>
@@ -772,7 +798,7 @@
 </section>
 
 {{-- 3. INVESTMENT SECTION --}}
-<section id="investment" class="py-16 md:py-24 bg-white dark:bg-darkBg px-6 border-t border-zinc-100 dark:border-zinc-800">
+<section id="about" class="py-16 md:py-24 bg-white dark:bg-darkBg px-6 border-t border-zinc-100 dark:border-zinc-800">
     <div class="max-w-[1400px] mx-auto">
         <div class="grid lg:grid-cols-12 gap-8 md:gap-12 items-start">
             <div class="lg:col-span-7 space-y-6">
@@ -849,11 +875,87 @@
                             <p class="text-[#d4af37] text-[10px] tracking-widest uppercase mt-4">— {{ $contents['inv_quote_auth'] ?? 'Chief Curator' }}</p>
                         </div>
                     </div>
+                    <div x-data="{ open: false }" class="space-y-6">
+
+            <a href="https://radkasyrova.com" target="_blank" class="w-full hover:scale-105 transition-transform flex justify-center">
+        <img src="{{ asset('uploads/content/radkasyrova.png') }}" 
+             alt="Radka Syrova" 
+             class="w-full h-16 object-contain brightness-0 dark:invert opacity-80 hover:opacity-100">
+    </a>
+    <button @click="open = true" class="w-full bg-[#d4af37] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black text-black font-bold uppercase tracking-[0.3em] text-[10px] py-6 transition-all duration-500 shadow-xl">
+        Investment Prospectus
+    </button>
+    <p style="font-family: ui-sans-serif, system-ui, sans-serif !important;" class="text-[9px] text-center tracking-[0.2em] text-zinc-400 dark:text-zinc-500 uppercase font-bold">Private & Confidential</p>
+
+    <div x-show="open" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+         x-cloak>
+        
+        <div @click.away="open = false" class="bg-[#fcfcf9] w-full max-w-lg p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 opacity-[0.03] -mr-10 -mt-10">
+                <svg width="300" height="300" viewBox="0 0 100 100"><path d="M50 10 L90 90 L10 90 Z" fill="currentColor"/></svg>
+            </div>
+
+            <div class="bg-[#d4af37] p-8 md:p-10 mb-8 shadow-xl">
+                {{-- Judul (H2) dengan warna putih --}}
+                <h2 class="text-3xl font-serif text-white mb-4 leading-tight">
+                    Expression of Interest (EOI)
+                </h2>
+                
+                {{-- Deskripsi (P) dengan warna putih/off-white agar nyaman dibaca --}}
+                <p class="text-sm text-white/90 leading-relaxed antialiased tracking-wide">
+                    Exclusively curated and directed by Radka Syrova, all inquiries for acquisition and installation are managed personally by the curator.
+                </p>
+            </div>
+
+            <form action="{{ route('send.investment.contact') }}" method="POST" class="space-y-5 relative z-10">
+                @csrf
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold text-zinc-500 mb-2">Full Name</label>
+                    <input type="text" name="name" required class="w-full bg-transparent border-b border-zinc-300 py-2 focus:border-[#d4af37] outline-none transition-colors text-zinc-900">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold text-zinc-500 mb-2">Interest Type</label>
+                    <select name="interest" class="w-full bg-transparent border-b border-zinc-300 py-2 focus:border-[#d4af37] outline-none transition-colors text-zinc-900 appearance-none">
+                        <option value="Raw Material Investment">private Investor</option>
+                        <option value="Art Commission">Family Office</option>
+                        <option value="Corporate Installation">Instutional Investor</option>
+                        <option value="Corporate Installation">Asset Manager</option>
+                        <option value="Corporate Installation">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold text-zinc-500 mb-2">Email</label>
+                    <input type="email" name="email" required class="w-full bg-transparent border-b border-zinc-300 py-2 focus:border-[#d4af37] outline-none transition-colors text-zinc-900">
                     
-                    <div class="space-y-4">
-                        <button class="w-full bg-[#d4af37] text-black font-bold uppercase tracking-[0.3em] text-[10px] py-5 shadow-xl">Investment Prospectus</button>
-                        <p class="text-[9px] text-center tracking-[0.2em] text-zinc-400 uppercase font-bold">Private & Confidential</p>
-                    </div>
+                </div>
+
+                <button type="submit" 
+        x-data="{ loading: false }" 
+        @click="loading = true"
+        :class="loading ? 'opacity-50 cursor-not-allowed' : ''"
+        class="w-full bg-[#d4af37] text-white font-bold py-4 mt-4 uppercase tracking-[0.2em] text-[11px] hover:bg-zinc-900 transition-colors">
+    <span x-show="!loading">Download Prospectus</span>
+    <span x-show="loading">Sending...</span>
+</button>
+                
+                <p class="text-[10px] text-center italic text-zinc-400 mt-4">Your inquiry is confidential.</p>
+            </form>
+
+            <button @click="open = false" class="absolute top-4 right-4 text-zinc-400 hover:text-black">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </div>
+    </div>
+</div>
+    </div>
+</div> 
                 </div>
             </div>
         </div>
